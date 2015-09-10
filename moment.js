@@ -17,7 +17,7 @@
 "use strict";
 
 /**
- * @fileoverview Externs for moment.js 2.3.0
+ * @fileoverview Externs for moment.js 2.10.0
  * @externs
  */
 
@@ -33,21 +33,21 @@ function Moment() {};
 Moment.DateRecord;
 
 /**
- * @typedef {!(Moment|string|number|Date|Array.<!number>)}
+ * @typedef {(Moment|string|number|Date|Array.<!number>|Moment.DateRecord)}
  */
 Moment.MomentLike;
-
-/**
- * @nosideeffects
- * @type {(function():!Moment|function(!Date):!Moment|function(!number):!Moment|function(!Array.<!number>):!Moment|function(!string, !(string|Array.<!string>)=):!Moment|function(!Moment):!Moment|function(!Moment.DateRecord):!Moment)}
- */
-function moment() {};
 
 /**
  * @interface
  * @author takahashikzn
  */
 Moment.Duration = function() {};
+
+/**
+ * @nosideeffects
+ * @type {(function():!Moment|function(!Moment.MomentLike):!Moment|function(!string, !(string|Array<!string>)=):!Moment)}
+ */
+function moment() {};
 
 /**
  * @since 1.6.0
@@ -58,7 +58,7 @@ Moment.prototype.unix = function(a) {};
 
 /**
  * @since 1.5.0
- * @type {(function():!Moment|function(!number):!Moment|function(!Array.<!number>):!Moment|function(!string, !string=, !string=):!Moment|function(!string, !Array.<!string>):!Moment|function(!Moment):!Moment|function(!Date):!Moment)}
+ * @type {(function():!Moment|function(!Moment.MomentLike):!Moment|function(!string, !string=, !string=):!Moment|function(!string, !Array<!string>):!Moment)}
  */
 Moment.prototype.utc = function() {};
 
