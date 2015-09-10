@@ -1,4 +1,4 @@
-/*
+/**
  * @license
  * Copyright 2015 TAKAHASHI kazunari
  *
@@ -33,6 +33,11 @@ function Moment() {};
 Moment.DateRecord;
 
 /**
+ * @typedef {!(Moment|string|number|Date|Array.<!number>)}
+ */
+Moment.MomentLike;
+
+/**
  * @nosideeffects
  * @type {(function():!Moment|function(!Date):!Moment|function(!number):!Moment|function(!Array.<!number>):!Moment|function(!string, !(string|Array.<!string>)=):!Moment|function(!Moment):!Moment|function(!Moment.DateRecord):!Moment)}
  */
@@ -56,6 +61,12 @@ Moment.prototype.unix = function(a) {};
  * @type {(function():!Moment|function(!number):!Moment|function(!Array.<!number>):!Moment|function(!string, !string=, !string=):!Moment|function(!string, !Array.<!string>):!Moment|function(!Moment):!Moment|function(!Date):!Moment)}
  */
 Moment.prototype.utc = function() {};
+
+/**
+ * @since 2.9.0
+ * @type {function():!number|function(!(number|string)):!Moment}
+ */
+Moment.prototype.utcOffset = function() {};
 
 /**
  * @since 2.3.0
@@ -198,6 +209,12 @@ Moment.prototype.month = function() {};
 Moment.prototype.months = function() {};
 
 /**
+ * @since 2.6.0
+ * @type {(function():!number|function(!number):!Moment)}
+ */
+Moment.prototype.quarter = function() {};
+
+/**
  * @since 1.0.0
  * @type {(function():!number|function(!number):!Moment)}
  */
@@ -220,6 +237,18 @@ Moment.prototype.weekYear = function() {};
  * @type {(function():!number|function(!number):!Moment)}
  */
 Moment.prototype.isoWeekYear = function() {};
+
+/**
+ * @since 2.6.0
+ * @return {!number}
+ */
+Moment.prototype.weeksInYear = function() {};
+
+/**
+ * @since 2.6.0
+ * @return {!number}
+ */
+Moment.prototype.isoWeeksInYear = function() {};
 
 /**
  * @since 2.2.1
@@ -268,7 +297,7 @@ Moment.prototype.endOf = function(a) {};
 /**
  * @nosideeffects
  * @since 2.1.0
- * @param {!(Moment|string|number|Date|Array.<!number>)} a
+ * @param {function(!Moment.MomentLike):!Moment|function(...Moment):!Moment} a
  * @return {!Moment}
  */
 Moment.prototype.max = function(a) {};
@@ -276,7 +305,7 @@ Moment.prototype.max = function(a) {};
 /**
  * @nosideeffects
  * @since 2.1.0
- * @param {!(Moment|string|number|Date|Array.<!number>)} a
+ * @param {function(!Moment.MomentLike):!Moment|function(...Moment):!Moment} a
  * @return {!Moment}
  */
 Moment.prototype.min = function(a) {};
@@ -306,11 +335,28 @@ Moment.prototype.fromNow = function(a) {};
 /**
  * @nosideeffects
  * @since 1.0.0
- * @param {!(Moment|string|number|Date|Array.<!number>)} a
+ * @param {!Moment.MomentLike} a
  * @param {!boolean=} b
  * @return {!string}
  */
 Moment.prototype.from = function(a, b) {};
+
+/**
+ * @nosideeffects
+ * @since 2.10.0
+ * @param {!boolean=} a
+ * @return {!string}
+ */
+Moment.prototype.toNow = function(a) {};
+
+/**
+ * @nosideeffects
+ * @since 2.10.0
+ * @param {!Moment.MomentLike} a
+ * @param {!boolean=} b
+ * @return {!string}
+ */
+Moment.prototype.to = function(a, b) {};
 
 /**
  * @nosideeffects
@@ -322,7 +368,7 @@ Moment.prototype.calendar = function() {};
 /**
  * @nosideeffects
  * @since 1.0.0
- * @param {!(Moment|string|number|Date|Array.<!number>)} a
+ * @param {!Moment.MomentLike} a
  * @param {!string=} b
  * @param {!boolean=} c
  * @return {!number}
@@ -337,6 +383,7 @@ Moment.prototype.diff = function(a, b, c) {};
 Moment.prototype.valueOf = function() {};
 
 /**
+ * @deprecated
  * @since 1.2.0
  * @type {(function():!number|function(!(number|string)):!Moment)}
  */
@@ -372,8 +419,15 @@ Moment.prototype.toISOString = function() {};
 
 /**
  * @nosideeffects
+ * @since 2.10.0
+ * @return {!Moment.DateRecord}
+ */
+Moment.prototype.toObject = function() {};
+
+/**
+ * @nosideeffects
  * @since 2.0.0
- * @param {!(Moment|string|number|Date|Array.<!number>)} a
+ * @param {!Moment.MomentLike} a
  * @param {!string=} b
  * @return {!boolean}
  */
@@ -382,7 +436,7 @@ Moment.prototype.isBefore = function(a, b) {};
 /**
  * @nosideeffects
  * @since 2.0.0
- * @param {!(Moment|string|number|Date|Array.<!number>)} a
+ * @param {!Moment.MomentLike} a
  * @param {!string=} b
  * @return {!boolean}
  */
@@ -391,11 +445,21 @@ Moment.prototype.isSame = function(a, b) {};
 /**
  * @nosideeffects
  * @since 2.0.0
- * @param {!(Moment|string|number|Date|Array.<!number>)} a
+ * @param {!Moment.MomentLike} a
  * @param {!string=} b
  * @return {!boolean}
  */
 Moment.prototype.isAfter = function(a, b) {};
+
+/**
+ * @nosideeffects
+ * @since 2.9.0
+ * @param {!Moment.MomentLike} a
+ * @param {!Moment.MomentLike} b
+ * @param {!string=} c
+ * @return {!boolean}
+ */
+Moment.prototype.isBetween = function(a, b, c) {};
 
 /**
  * @nosideeffects
@@ -425,6 +489,14 @@ Moment.prototype.isDSTShifted = function() {};
  * @return {!boolean}
  */
 Moment.prototype.isMoment = function(a) {};
+
+/**
+ * @nosideeffects
+ * @since 2.9.0
+ * @param {?} a
+ * @return {!boolean}
+ */
+Moment.prototype.isDate = function(a) {};
 
 /**
  * @nosideeffects
@@ -559,11 +631,19 @@ Moment.Duration.prototype.subtract = function() {};
 Moment.Duration.prototype.as = function(a) {};
 
 /**
+ * @nosideeffects
  * @since 2.1.0
  * @param {!string} unit
  * @return {!number}
  */
 Moment.Duration.prototype.get = function(unit) {};
+
+/**
+ * @nosideeffects
+ * @since 2.9.0
+ * @return {!string}
+ */
+Moment.Duration.prototype.toJSON = function() {};
 
 /* === Utilities === */
 
@@ -580,3 +660,183 @@ Moment.normalizeUnits = function(unit) {};
  * @return {!Moment}
  */
 Moment.invalid = function(a) {};
+
+/* === Locale === */
+
+/**
+ * @since 2.8.0
+ * @interface
+ */
+Moment.Locale = function() {};
+
+/**
+ * @nosideeffects
+ * @since 2.8.0
+ * @param {!string=} a
+ * @return {!Moment.Locale}
+ */
+Moment.prototype.localeData = function(a) {};
+
+/**
+ * @nosideeffects
+ * @since 2.8.0
+ * @param {!Moment} a
+ * @return {!string}
+ */
+Moment.Locale.prototype.months = function(a) {};
+
+/**
+ * @nosideeffects
+ * @since 2.8.0
+ * @param {!Moment} a
+ * @return {!string}
+ */
+Moment.Locale.prototype.monthsShort = function(a) {};
+
+/**
+ * @nosideeffects
+ * @since 2.8.0
+ * @param {!string} a
+ * @return {!number}
+ */
+Moment.Locale.prototype.monthParse = function(a) {};
+
+/**
+ * @nosideeffects
+ * @since 2.8.0
+ * @param {!Moment} a
+ * @return {!string}
+ */
+Moment.Locale.prototype.weekdays = function(a) {};
+
+/**
+ * @nosideeffects
+ * @since 2.8.0
+ * @param {!Moment} a
+ * @return {!string}
+ */
+Moment.Locale.prototype.weekdaysShort = function(a) {};
+
+/**
+ * @nosideeffects
+ * @since 2.8.0
+ * @param {!Moment} a
+ * @return {!string}
+ */
+Moment.Locale.prototype.weekdaysMin = function(a) {};
+
+/**
+ * @nosideeffects
+ * @since 2.8.0
+ * @param {!string} a
+ * @return {!number}
+ */
+Moment.Locale.prototype.weekdaysParse = function(a) {};
+
+/**
+ * @nosideeffects
+ * @since 2.8.0
+ * @param {!string} a
+ * @return {!string}
+ */
+Moment.Locale.prototype.longDateFormat = function(a) {};
+
+/**
+ * @nosideeffects
+ * @since 2.8.0
+ * @param {!string} a
+ * @return {!boolean}
+ */
+Moment.Locale.prototype.isPM = function(a) {};
+
+/**
+ * @nosideeffects
+ * @since 2.8.0
+ * @param {!number} a
+ * @param {!number} b
+ * @param {!boolean} c
+ * @return {!string}
+ */
+Moment.Locale.prototype.meridiem = function(a, b, c) {};
+
+/**
+ * @nosideeffects
+ * @since 2.8.0
+ * @param {!string} a
+ * @param {!Moment} b
+ * @return {!string}
+ */
+Moment.Locale.prototype.calendar = function(a, b) {};
+
+/**
+ * @nosideeffects
+ * @since 2.8.0
+ * @param {!number} a
+ * @param {!string} b
+ * @param {!string} c
+ * @param {!boolean} d
+ * @return {!string}
+ */
+Moment.Locale.prototype.relativeTime = function(a, b, c, d) {};
+
+/**
+ * @nosideeffects
+ * @since 2.8.0
+ * @param {!number} a
+ * @param {!string} b
+ * @return {!string}
+ */
+Moment.Locale.prototype.pastFuture = function(a, b) {};
+
+/**
+ * @nosideeffects
+ * @since 2.8.0
+ * @param {!number} a
+ * @return {!string}
+ */
+Moment.Locale.prototype.ordinal = function(a) {};
+
+/**
+ * @nosideeffects
+ * @since 2.8.0
+ * @param {!string} a
+ * @return {!string}
+ */
+Moment.Locale.prototype.preparse = function(a) {};
+
+/**
+ * @nosideeffects
+ * @since 2.8.0
+ * @param {!string} a
+ * @return {!string}
+ */
+Moment.Locale.prototype.postformat = function(a) {};
+
+/**
+ * @nosideeffects
+ * @since 2.8.0
+ * @param {!Moment} a
+ * @return {!number}
+ */
+Moment.Locale.prototype.week = function(a) {};
+
+/**
+ * @nosideeffects
+ * @since 2.8.0
+ * @return {!string}
+ */
+Moment.Locale.prototype.invalidDate = function() {};
+
+/**
+ * @nosideeffects
+ * @since 2.8.0
+ * @return {!number}
+ */
+Moment.Locale.prototype.firstDayOfWeek = function() {};
+
+/**
+ * @nosideeffects
+ * @since 2.8.0
+ * @return {!number}
+ */
+Moment.Locale.prototype.firstDayOfYear = function() {};
