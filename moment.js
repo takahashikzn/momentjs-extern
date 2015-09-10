@@ -282,7 +282,6 @@ Moment.prototype.max = function(a) {};
 Moment.prototype.min = function(a) {};
 
 /**
- * @nosideeffects
  * @since 1.5.0
  * @return {!Moment}
  */
@@ -292,7 +291,7 @@ Moment.prototype.local = function() {};
  * @nosideeffects
  * @since 1.0.0
  * @param {!string=} a
- * @return {!Moment}
+ * @return {!string}
  */
 Moment.prototype.format = function(a) {};
 
@@ -300,7 +299,7 @@ Moment.prototype.format = function(a) {};
  * @nosideeffects
  * @since 1.0.0
  * @param {!boolean=} a
- * @return {!Moment}
+ * @return {!string}
  */
 Moment.prototype.fromNow = function(a) {};
 
@@ -309,14 +308,14 @@ Moment.prototype.fromNow = function(a) {};
  * @since 1.0.0
  * @param {!(Moment|string|number|Date|Array.<!number>)} a
  * @param {!boolean=} b
- * @return {!Moment}
+ * @return {!string}
  */
 Moment.prototype.from = function(a, b) {};
 
 /**
  * @nosideeffects
  * @since 1.3.0
- * @return {!Moment}
+ * @return {!string}
  */
 Moment.prototype.calendar = function() {};
 
