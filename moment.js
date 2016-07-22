@@ -453,6 +453,24 @@ Moment.prototype.isAfter = function(a, b) {};
 
 /**
  * @nosideeffects
+ * @since 2.10.7
+ * @param {!Moment.MomentLike} a
+ * @param {string=} b
+ * @return {boolean}
+ */
+Moment.prototype.isSameOrAfter = function(a, b) {};
+
+/**
+ * @nosideeffects
+ * @since 2.10.7
+ * @param {!Moment.MomentLike} a
+ * @param {string=} b
+ * @return {boolean}
+ */
+Moment.prototype.isSameOrBefore = function(a, b) {};
+
+/**
+ * @nosideeffects
  * @since 2.9.0
  * @param {!Moment.MomentLike} a
  * @param {!Moment.MomentLike} b
