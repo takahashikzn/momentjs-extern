@@ -51,6 +51,12 @@ function moment() {};
 
 /**
  * @since 1.6.0
+ * @type {(function(number, string):!Moment.Duration|function(number):!Moment.Duration|function(Object):!Moment.Duration|function(string):!Moment.Duration)}
+ */
+moment.duration = function() {};
+
+/**
+ * @since 1.6.0
  * @param {!number=} a
  * @return {!Moment}
  */
