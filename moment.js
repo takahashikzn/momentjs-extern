@@ -50,6 +50,12 @@ Moment.Duration = function() {};
 function moment() {};
 
 /**
+ * @since 1.2.0
+ * @type {function():!Moment}
+ */
+Moment.prototype.clone = function() {};
+
+/**
  * @since 1.6.0
  * @type {(function(number, string):!Moment.Duration|function(number):!Moment.Duration|function(Object):!Moment.Duration|function(string):!Moment.Duration)}
  */
